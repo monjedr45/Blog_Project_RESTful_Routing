@@ -1,0 +1,51 @@
+
+{% block content %}
+{% include "header.html" %}
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('{{ url_for('static', filename='img/edit-bg.jpg')}}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>New Post</h1>
+            <span class="subheading">You're going to make a great blog post!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+        <form method="post" action="{{ url_for('new_post') }}">
+          {{ form.csrf_token }}
+          <div>
+              {{ form.title.label }} <br> {{ form.title(size = 64) }}
+          </div>
+          <div>
+              {{ form.subtitle.label }} <br> {{ form.subtitle(size = 64) }}
+          </div>
+          <div>
+              {{ form.name.label }} <br> {{ form.name(size = 64) }}
+          </div>
+          <div>
+              {{ form.blog_image.label }} <br> {{ form.blog_image(size = 64) }}
+          </div>
+          <div>
+              {{ form.body.label }} {{ form.body(size = 64) }}
+          </div>
+          <div>
+              {{ form.submit() }}
+          </div>
+              
+      </form>
+
+      </div>
+    </div>
+  </div>
+
+{% include "footer.html" %}
+{% endblock %}

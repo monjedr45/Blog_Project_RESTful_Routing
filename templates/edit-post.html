@@ -1,0 +1,52 @@
+
+{% block content %}
+{% include "header.html" %}
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('{{ url_for('static', filename='img/edit-bg.jpg')}}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Edit Post</h1>
+            <span class="subheading">You can Edit your Post...!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+        <form method="post">
+          {{ form.csrf_token }}
+          <input type="hidden" name="post_id" value="{{ post_id }}">
+          <div>
+              {{ form.title_edit.label }} <br> {{ form.title_edit(size = 64) }}
+          </div>
+          <div>
+              {{ form.subtitle_edit.label }} <br> {{ form.subtitle_edit(size = 64) }}
+          </div>
+          <div>
+              {{ form.name_edit.label }} <br> {{ form.name_edit(size = 64) }}
+          </div>
+          <div>
+              {{ form.blog_image_edit.label }} <br> {{ form.blog_image_edit(size = 64) }}
+          </div>
+          <div>
+              {{ form.body_edit.label }} {{ form.body_edit(size = 64) }}
+          </div>
+          <div>
+              {{ form.submit_edit() }}
+          </div>
+              
+      </form>
+
+      </div>
+    </div>
+  </div>
+
+{% include "footer.html" %}
+{% endblock %}
