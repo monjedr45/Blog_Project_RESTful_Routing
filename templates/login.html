@@ -1,3 +1,5 @@
+
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,16 +41,10 @@
         
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('about') }}">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('logout') }}">Log Out</a>
+            <a class="nav-link" href="{{ url_for('register') }}">Register</a>
           </li>
         </ul>
 
@@ -56,43 +52,40 @@
     </div>
   </nav>
 
-
-<!-- Page Header -->
-<header class="masthead" style="background-image: url('{{ blog_data['img_url'] }}')">
-	<div class="overlay"></div>
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-8 col-md-10 mx-auto">
-				<div class="post-heading">
-					<h1>{{ blog_data["title"] }}</h1>
-					<h2 class="subheading">{{ blog_data["subtitle"] }}</h2>
-					<span class="meta">Posted by
-              <a href="#">{{ blog_data["author"] }}</a>
-              on {{ blog_data["date"] }}</span>
+<header class="masthead" style="background-image: url('https://images.unsplash.com/photo-1484100356142-db6ab6244067?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Log In</h1>
+            <span class="subheading">Welcome Back!</span>
           </div>
         </div>
       </div>
     </div>
   </header>
-
-  <!-- Post Content -->
-  <article>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <p>
-            {{ blog_data["body"] | safe }}
-          </p>
-           <hr>
-           <div class="clearfix">
-          <a class="btn btn-primary float-right" href="{{ url_for('edit_post', post_id=blog_data['id']) }}">Edit Post</a>
-        </div>
-          </div>
-      </div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2 col-md-12 mx-auto">
+                <form action="{{ url_for('login') }}" method="post">
+                    {{ form.csrf_token }}
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p style="color: red; font-size: 16px;">{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    {{ form.email_login(class="row", size=64, placeholder="Email", required="required") }}
+                    {{ form.password_login(class="row", size=64, placeholder="Password", required="required") }}
+                    {{ form.submit_login(class="btn btn-primary btn-block btn-large", value="Sign In") }}
+                </form>
+        </div>  
     </div>
-  </article>
 
-  <hr>
+</div>
+
   <!-- Footer -->
   <footer>
     <div class="container">
@@ -140,3 +133,5 @@
 </body>
 
 </html>
+
+{% endblock %}
